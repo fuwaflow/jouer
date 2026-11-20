@@ -50,12 +50,13 @@ upgrade-to-bazzite:
     [[ "${confirm,,}" == "y" ]] || exit 0
 
     if command -v rpm-ostree >/dev/null 2>&1; then
-        rpm-ostree rebase "ostree-unverified-registry:${ref}"
+        rpm-ostree rebase "ostree-image-signed:docker://${ref}"
     else
-        sudo bootc switch "${ref}"
+        sudo bootc switch --enforce-container-sigpolicy "${ref}"
     fi
 
     echo
-    echo "done! reboot to boot into bazzite."
-    echo "after rebooting, switch to the signed image with:"
-    echo "  rpm-ostree rebase ostree-image-signed:docker://${ref}"
+    read -rp "done! reboot now? [y/N] " reboot_now
+    if [[ "${reboot_now,,}" == "y" ]]; then
+        systemctl reboot
+    fi
