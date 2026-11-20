@@ -19,9 +19,6 @@ modules:
         destination: /
 
   - type: dnf
-    repos:
-      nonfree: rpmfusion
-      cleanup: true
     install:
       packages:
         - "@cinnamon-desktop-environment"
@@ -31,16 +28,8 @@ modules:
         - pavucontrol
         - xorg-x11-server-Xorg
         - xorg-x11-xinit
-
-        - akmod-nvidia-470xx
-        - xorg-x11-drv-nvidia-470xx
-        - xorg-x11-drv-nvidia-470xx-cuda
-        - xorg-x11-drv-nvidia-470xx-libs
-        - xorg-x11-drv-nvidia-470xx-libs.i686
-        - kernel-devel
         - vulkan-loader
         - vulkan-loader.i686
-
         - gamemode
         - mangohud
         - steam-devices
@@ -50,6 +39,24 @@ modules:
       packages:
         - firefox
         - firefox-langpacks
+
+  - type: dnf
+    repos:
+      nonfree: rpmfusion
+      cleanup: true
+    install:
+      install-weak-deps: false
+      exclude:
+        - libva-intel-driver
+        - libavcodec-freeworld
+        - ffmpeg-libs
+      packages:
+        - akmod-nvidia-470xx
+        - xorg-x11-drv-nvidia-470xx
+        - xorg-x11-drv-nvidia-470xx-cuda
+        - xorg-x11-drv-nvidia-470xx-libs
+        - xorg-x11-drv-nvidia-470xx-libs.i686
+        - kernel-devel
 
   - type: script
     scripts:

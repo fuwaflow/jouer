@@ -7,6 +7,14 @@ if [[ -z "${KVER}" ]]; then
   exit 1
 fi
 
+if [[ ! -d "/usr/src/kernels/${KVER}" ]]; then
+  if ! dnf5 install -y "kernel-devel-${KVER}"; then
+    dnf5 install -y fedora-repos-archive
+    dnf5 install -y --enablerepo=updates-archive "kernel-devel-${KVER}"
+    dnf5 remove -y fedora-repos-archive
+  fi
+fi
+
 akmods --force --kernels "${KVER}" --kmod nvidia-470xx
 
 if ! find "/usr/lib/modules/${KVER}" -name "nvidia*.ko*" | grep -q .; then
