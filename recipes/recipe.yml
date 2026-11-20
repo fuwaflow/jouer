@@ -1,0 +1,92 @@
+---
+# yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
+
+name: jouer
+description: fedora atomic cinnamon image with nvidia 470xx drivers for kepler gpus
+
+base-image: ghcr.io/ublue-os/base-main
+alt-tags:
+  - latest
+image-version: 45
+
+platforms:
+  - linux/amd64
+
+modules:
+  - type: files
+    files:
+      - source: system
+        destination: /
+
+  - type: dnf
+    repos:
+      nonfree: rpmfusion
+      cleanup: true
+    install:
+      packages:
+        - "@cinnamon-desktop-environment"
+        - lightdm
+        - lightdm-gtk-greeter
+        - network-manager-applet
+        - pavucontrol
+        - xorg-x11-server-Xorg
+        - xorg-x11-xinit
+
+        - akmod-nvidia-470xx
+        - xorg-x11-drv-nvidia-470xx
+        - xorg-x11-drv-nvidia-470xx-cuda
+        - xorg-x11-drv-nvidia-470xx-libs
+        - xorg-x11-drv-nvidia-470xx-libs.i686
+        - kernel-devel
+        - vulkan-loader
+        - vulkan-loader.i686
+
+        - gamemode
+        - mangohud
+        - steam-devices
+        - flatpak
+        - just
+    remove:
+      packages:
+        - firefox
+        - firefox-langpacks
+
+  - type: script
+    scripts:
+      - build-nvidia-470xx.sh
+
+  - type: systemd
+    system:
+      enabled:
+        - lightdm.service
+
+  - type: default-flatpaks
+    configurations:
+      - notify: false
+        scope: system
+        install:
+          - com.valvesoftware.Steam
+          - net.lutris.Lutris
+          - com.heroicgameslauncher.hgl
+          - net.davidotek.pupgui2
+          - io.mrarm.mcpelauncher
+          - com.github.tchx84.Flatseal
+          - org.mozilla.firefox
+          - dev.vencord.Vesktop
+          - org.videolan.VLC
+
+  - type: os-release
+    properties:
+      ID: jouer
+      ID_LIKE: fedora
+      NAME: jouer
+      PRETTY_NAME: "jouer"
+      VERSION: "45"
+      VERSION_CODENAME: jouer
+      DEFAULT_HOSTNAME: jouer
+      HOME_URL: "https://github.com/fuwaflow/jouer"
+      BUG_REPORT_URL: "https://github.com/fuwaflow/jouer/issues"
+
+  - type: initramfs
+
+  - type: signing
