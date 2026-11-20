@@ -51,7 +51,6 @@ modules:
   - type: script
     scripts:
       - build-nvidia-470xx.sh
-      - compile-schemas.sh
 
   - type: systemd
     system:

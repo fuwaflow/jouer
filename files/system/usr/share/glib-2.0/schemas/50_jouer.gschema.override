@@ -1,7 +1,0 @@
-[org.gnome.libgnomekbd.keyboard]
-layouts=['us', 'ara']
-options=['grp\tgrp:alt_shift_toggle']
-
-[org.gnome.desktop.input-sources]
-sources=[('xkb', 'us'), ('xkb', 'ara')]
-xkb-options=['grp:alt_shift_toggle']
