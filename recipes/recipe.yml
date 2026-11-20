@@ -52,6 +52,10 @@ modules:
       enabled:
         - lightdm.service
 
+  - type: script
+    snippets:
+      - systemctl set-default graphical.target
+
   - type: default-flatpaks
     configurations:
       - notify: false
