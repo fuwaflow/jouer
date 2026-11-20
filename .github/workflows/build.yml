@@ -24,7 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - recipe: recipes/recipe.yml
+          - recipe: recipe.yml
             runner: ubuntu-latest
     steps:
       - name: Build Custom Image
