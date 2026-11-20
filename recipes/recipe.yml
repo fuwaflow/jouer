@@ -67,6 +67,10 @@ modules:
           - dev.vencord.Vesktop
           - org.videolan.VLC
 
+  - type: justfiles
+    validate: true
+    install: true
+
   - type: os-release
     properties:
       ID: jouer
