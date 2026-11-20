@@ -25,6 +25,7 @@ rm -rf /tmp/akmod-dl /tmp/akmod-src /tmp/kmod-out
 mkdir -p /tmp/akmod-dl /tmp/akmod-src /tmp/kmod-out
 
 dnf5 download --disablerepo='rpmfusion-free*' --destdir=/tmp/akmod-dl akmod-nvidia-470xx
+dnf5 install -y --disablerepo='rpmfusion-free*' --setopt=install_weak_deps=False xorg-x11-drv-nvidia-470xx-kmodsrc
 
 (
   cd /tmp/akmod-src
@@ -62,7 +63,7 @@ dnf5 install -y --disablerepo='rpmfusion-free*' --setopt=install_weak_deps=False
   xorg-x11-drv-nvidia-470xx-libs.i686
 
 rm -rf /tmp/akmod-dl /tmp/akmod-src /tmp/kmod-out
-dnf5 remove -y rpmfusion-free-release rpmfusion-nonfree-release
+dnf5 remove -y xorg-x11-drv-nvidia-470xx-kmodsrc rpmfusion-free-release rpmfusion-nonfree-release
 systemctl disable akmods.service || true
 
 if ! find "/usr/lib/modules/${KVER}" -name "nvidia*.ko*" | grep -q .; then
