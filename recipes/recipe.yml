@@ -38,6 +38,11 @@ modules:
         - akmods
         - kernel-devel
         - cpio
+        - langpacks-ar
+        - glibc-langpack-ar
+        - google-noto-sans-arabic-fonts
+        - google-noto-naskh-arabic-fonts
+        - google-noto-kufi-arabic-fonts
     remove:
       packages:
         - firefox
@@ -46,6 +51,7 @@ modules:
   - type: script
     scripts:
       - build-nvidia-470xx.sh
+      - compile-schemas.sh
 
   - type: systemd
     system:
