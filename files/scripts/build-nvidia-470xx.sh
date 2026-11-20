@@ -24,8 +24,8 @@ dnf5 install -y \
 rm -rf /tmp/akmod-dl /tmp/akmod-src /tmp/kmod-out
 mkdir -p /tmp/akmod-dl /tmp/akmod-src /tmp/kmod-out
 
-dnf5 download --disablerepo='rpmfusion-free*' --destdir=/tmp/akmod-dl akmod-nvidia-470xx
-dnf5 install -y --disablerepo='rpmfusion-free*' --setopt=install_weak_deps=False xorg-x11-drv-nvidia-470xx-kmodsrc
+dnf5 download --disablerepo='rpmfusion-free*,fedora-multimedia*' --destdir=/tmp/akmod-dl akmod-nvidia-470xx
+dnf5 install -y --disablerepo='rpmfusion-free*,fedora-multimedia*' --setopt=install_weak_deps=False xorg-x11-drv-nvidia-470xx-kmodsrc
 
 (
   cd /tmp/akmod-src
@@ -55,7 +55,9 @@ if (( ${#KMOD_RPMS[@]} == 0 )); then
   exit 1
 fi
 
-dnf5 install -y --disablerepo='rpmfusion-free*' --setopt=install_weak_deps=False \
+dnf5 install -y --disablerepo='rpmfusion-free*,rpmfusion-nonfree*' mesa-libEGL.i686
+
+dnf5 install -y --disablerepo='rpmfusion-free*,fedora-multimedia*' --setopt=install_weak_deps=False \
   "${KMOD_RPMS[@]}" \
   xorg-x11-drv-nvidia-470xx \
   xorg-x11-drv-nvidia-470xx-cuda \
