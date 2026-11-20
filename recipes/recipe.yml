@@ -61,15 +61,19 @@ modules:
       - notify: false
         scope: system
         install:
+          - io.github.kolunmi.Bazaar
+          - io.github.flattool.Warehouse
+          - com.github.tchx84.Flatseal
           - com.valvesoftware.Steam
           - net.lutris.Lutris
           - com.heroicgameslauncher.hgl
-          - net.davidotek.pupgui2
+          - com.vysp3r.ProtonPlus
+          - org.prismlauncher.PrismLauncher
           - io.mrarm.mcpelauncher
-          - com.github.tchx84.Flatseal
           - org.mozilla.firefox
           - dev.vencord.Vesktop
-          - org.videolan.VLC
+          - io.github.celluloid_player.Celluloid
+          - io.missioncenter.MissionCenter
 
   - type: justfiles
     validate: true
